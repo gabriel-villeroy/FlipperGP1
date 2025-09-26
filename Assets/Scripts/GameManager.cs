@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     
     [SerializeField] private GameObject ball;
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform spawnPoint; 
+    [SerializeField] private int ballLeft = 3;
     public int ballCount;
     private GameObject currentBall;
 
@@ -27,6 +28,11 @@ public class GameManager : MonoBehaviour
         { 
             SpawnBall();
         }
+
+        if (ballLeft == 0)
+        {
+            GameOver();
+        }
     }
 
     private void SpawnBall()
@@ -34,5 +40,10 @@ public class GameManager : MonoBehaviour
         currentBall = Instantiate(ball, spawnPoint.position, Quaternion.identity);
         currentBall.layer = 3;
         ballCount++;
+    }
+
+    private void GameOver()
+    {
+        
     }
 }
