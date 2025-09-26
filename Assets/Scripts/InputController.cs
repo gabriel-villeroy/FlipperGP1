@@ -9,8 +9,8 @@ public class PaddleController : MonoBehaviour
 
     [SerializeField] private float defaultPivotRot;
     [SerializeField] private float movementPivotRot;
-    
-    [SerializeField]
+
+    [SerializeField] private float moveDuration;
 
     private float pivotTargetRot;
 
@@ -41,14 +41,15 @@ public class PaddleController : MonoBehaviour
         
         if (targetPivot == LPivot)
         {
-            targetPivot.transform.rotation = 
-                Quaternion.Euler(0,0,-pivotTargetRot);
+            //targetPivot.transform.rotation = Quaternion.Euler(0,0,-pivotTargetRot);
+            targetPivot.transform.DORotate(new Vector3(0, 0, -pivotTargetRot), moveDuration);
+
         }
 
         if (targetPivot == RPivot)
         {
-            targetPivot.transform.rotation = 
-                Quaternion.Euler(0,0,pivotTargetRot);
+            //targetPivot.transform.rotation = Quaternion.Euler(0,0,pivotTargetRot);
+            targetPivot.transform.DORotate(new Vector3(0, 0, pivotTargetRot), moveDuration);
         }
     }
 }
