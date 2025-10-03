@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BumperController : MonoBehaviour
+public class Bumper : MonoBehaviour
 {
     [SerializeField] private float strength;
     private void OnCollisionEnter(Collision other)
