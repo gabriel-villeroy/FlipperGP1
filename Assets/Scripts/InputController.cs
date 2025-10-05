@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using DG.Tweening;
+using Unity.Android.Gradle.Manifest;
 
 public class PaddleController : MonoBehaviour
 {

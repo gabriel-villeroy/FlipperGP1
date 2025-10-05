@@ -1,8 +1,8 @@
 using System;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Application = Unity.Android.Gradle.Manifest.Application;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +17,19 @@ public class GameManager : MonoBehaviour
     
     [Header("UI")] 
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject pausePanel;
     [SerializeField] private TMP_Text ballLeftText;
+    [SerializeField] private float holdTime = 1f;
+    private float timeHeld;
+
+    public enum GameState
+    {
+        Game,
+        Pause,
+        GameOver
+    }
+
+    public GameState currentGameState = GameState.Game;
 
     private void Awake()
     {
@@ -26,29 +38,28 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        currentGameState = GameState.Game;
         SpawnBall();
     }
 
     void Update()
     {
-        DisplayBallCount();
         if (ballLeft == 0)
-        {
+        { 
             GameOver();
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Retry();
-            }
+            return;
         }
-        else
-        {
-            if (!ballInScene)
-            { 
-                SpawnBall();
-            }
+        if (!ballInScene)
+        { 
+            SpawnBall();
         }
+        PauseInputs();
+        DisplayBallCount();
     }
 
+        
+    //Game
+    
     private void SpawnBall()
     {
         currentBall = Instantiate(ball, spawnPoint.position, Quaternion.identity);
@@ -60,14 +71,87 @@ public class GameManager : MonoBehaviour
     {
         ballLeftText.text = ballLeft + " Ball Left";
     }
+    
+    
+    //PauseMenu
 
+    private void SetPause(bool paused)
+    {
+        if (paused)
+        {
+            currentGameState = GameState.Pause;
+            Time.timeScale = 0;
+        }
+        else
+        {
+            currentGameState = GameState.Game;
+            Time.timeScale = 1;
+        }
+        pausePanel.SetActive(!pausePanel.activeSelf);
+    }
+
+    private void PauseInputs()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetPause(currentGameState != GameState.Pause);
+        }
+
+        if (currentGameState == GameState.Pause)
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                LoadMenu();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Quit();
+            }
+        }
+    }
+    
+    
+    //GameOver
+    
+    public void GameOverPanelInputs()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Retry();
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            LoadMenu();
+        }
+    }
+    
+    private void GameOver()
+    {
+        if (currentGameState != GameState.GameOver)
+        {
+            currentGameState = GameState.GameOver;
+            gameOverPanel.SetActive(true);
+        }
+        GameOverPanelInputs();
+    }
+    
+    
+    //SceneControl
+    
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void GameOver()
+    public void LoadMenu()
     {
-        gameOverPanel.SetActive(true);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+    }
+
+    public void Quit()
+    {
+        //Application.Quit();
     }
 }

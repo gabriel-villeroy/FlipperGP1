@@ -1,0 +1,16 @@
+gravité inversée ?
+- bouton pour inverser la gravité = trop permissif
+
+- changement de gravité au contact :
+des paddles
+d'un object spécifique
+
+- changement de gravité tout les x secondes.
+
+axes à inverser :
+
+Y+ / Y-
+
+X+ / X-
+
+0.5X, -Y / -0.5X, -Y
