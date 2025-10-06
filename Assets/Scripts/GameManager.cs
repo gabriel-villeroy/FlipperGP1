@@ -115,13 +115,17 @@ public class GameManager : MonoBehaviour
     
     public void GameOverPanelInputs()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.R))
         {
             Retry();
         }
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Tab))
         {
             LoadMenu();
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Quit();
         }
     }
     
@@ -152,5 +156,6 @@ public class GameManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+        Debug.Log("Application.Quit");
     }
 }
