@@ -12,6 +12,7 @@ public class Bumper : MonoBehaviour
         direction = direction.normalized;
         
         other.rigidbody.AddForce(direction * strength);
+        ScoreManager.Instance.AddScore(ScoreManager.Instance.bumperBonus);
     }
 }
 

@@ -2,7 +2,6 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Application = Unity.Android.Gradle.Manifest.Application;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        DisplayBallCount();
         if (ballLeft == 0)
         { 
             GameOver();
@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
             SpawnBall();
         }
         PauseInputs();
-        DisplayBallCount();
     }
 
         
@@ -152,6 +151,6 @@ public class GameManager : MonoBehaviour
 
     public void Quit()
     {
-        //Application.Quit();
+        Application.Quit();
     }
 }
