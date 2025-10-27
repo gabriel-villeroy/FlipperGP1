@@ -4,6 +4,7 @@ public class HingeController : MonoBehaviour
 {
     HingeJoint hingeJoint;
     [SerializeField] private KeyCode key;
+    [SerializeField] private KeyCode altKey;
 
     [SerializeField] float targetPosition = 75f;
     [SerializeField] float originPosition;
@@ -22,7 +23,7 @@ public class HingeController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(key))
+        if (Input.GetKey(key) || Input.GetKey(altKey))
         {
             jointSpring.targetPosition = targetPosition;
         }
@@ -43,7 +44,15 @@ public class HingeController : MonoBehaviour
 
     void SetInputKey()
     {
-        if (isRightPaddle) key = KeyCode.RightArrow;
-        else key = KeyCode.LeftArrow;
+        if (isRightPaddle)
+        {
+            key = KeyCode.RightArrow;
+            altKey = KeyCode.RightShift;
+        }
+        else
+        {
+            key = KeyCode.LeftArrow;
+            altKey = KeyCode.LeftShift;
+        }
     }
 }
