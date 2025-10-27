@@ -5,6 +5,7 @@ using Unity.Android.Gradle.Manifest;
 
 public class PaddleController : MonoBehaviour
 {
+    /*
     [SerializeField] private GameObject RPivot;
     [SerializeField] private GameObject LPivot;
 
@@ -53,4 +54,5 @@ public class PaddleController : MonoBehaviour
             targetPivot.transform.DORotate(new Vector3(0, 0, pivotTargetRot), moveDuration);
         }
     }
+    */
 }
