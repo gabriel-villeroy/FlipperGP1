@@ -46,13 +46,13 @@ public class HingeController : MonoBehaviour
     {
         if (isRightPaddle)
         {
-            key = KeyCode.RightArrow;
-            altKey = KeyCode.RightShift;
+            key = GameManager.Instance.rightKey;
+            altKey = GameManager.Instance.rightAltKey;
         }
         else
         {
-            key = KeyCode.LeftArrow;
-            altKey = KeyCode.LeftShift;
+            key = GameManager.Instance.leftKey;
+            altKey = GameManager.Instance.leftAltKey;
         }
     }
 }

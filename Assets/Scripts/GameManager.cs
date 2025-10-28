@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    [Header("Keys")] 
+    public KeyCode rightKey;
+    public KeyCode rightAltKey;
+    public KeyCode leftKey;
+    public KeyCode leftAltKey;
     
     [Header("Ball")]
     [SerializeField] private GameObject ball;
@@ -20,6 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text ballLeftText;
     [SerializeField] private float holdTime = 1f;
     private float timeHeld;
+    private bool inInvertedMode;
 
     public enum GameState
     {
@@ -38,11 +45,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentGameState = GameState.Game;
+        RefreshSceneInvertion();
         SpawnBall();
     }
 
     void Update()
     {
+        InvertModeInput();
         DisplayBallCount();
         if (ballLeft == 0)
         { 
@@ -69,6 +78,36 @@ public class GameManager : MonoBehaviour
     private void DisplayBallCount()
     {
         ballLeftText.text = ballLeft + " Ball Left";
+    }
+    
+    
+    //Invert
+
+    private void InvertModeInput()
+    {
+        if ((Input.GetKey(rightKey) && Input.GetKey(leftKey)) ||
+            (Input.GetKey(rightAltKey) && Input.GetKey(leftAltKey)))
+        {
+            Invertbool();
+            RefreshSceneInvertion();
+        }
+    }
+    
+    private void Invertbool()
+    {
+        inInvertedMode =! inInvertedMode;
+    }
+
+    private void RefreshSceneInvertion()
+    {
+        foreach (var element in GameObject.FindGameObjectsWithTag("NegItem"))
+        {
+            element.SetActive(inInvertedMode);
+        }
+        foreach (var element in GameObject.FindGameObjectsWithTag("PosItem"))
+        {
+            element.SetActive(!inInvertedMode);
+        }
     }
     
     

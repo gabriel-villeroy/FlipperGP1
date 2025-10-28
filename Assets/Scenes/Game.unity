@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 189521903}
   m_Layer: 7
   m_Name: Bumper
-  m_TagString: Untagged
+  m_TagString: NormItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 294518369}
   m_Layer: 7
   m_Name: Bumper (1)
-  m_TagString: Untagged
+  m_TagString: PosItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1700,7 +1700,7 @@ GameObject:
   - component: {fileID: 561720566}
   m_Layer: 7
   m_Name: Bumper (2)
-  m_TagString: Untagged
+  m_TagString: NegItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2037,6 +2037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 0
+  altKey: 0
   targetPosition: 30
   originPosition: 0
 --- !u!1 &815353475
@@ -2084,6 +2085,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3632da475819045918e5774f08f30d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightKey: 0
+  rightAltKey: 0
+  leftKey: 0
+  leftAltKey: 0
   ball: {fileID: 3785102622087268406, guid: d493228b2ff13364889b236097caf268, type: 3}
   spawnPoint: {fileID: 1575904920}
   ballLeft: 3
@@ -2865,6 +2870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 0
+  altKey: 0
   targetPosition: 30
   originPosition: 0
 --- !u!1 &1082568291
