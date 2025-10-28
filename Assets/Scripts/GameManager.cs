@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -85,8 +86,8 @@ public class GameManager : MonoBehaviour
 
     private void InvertModeInput()
     {
-        if ((Input.GetKey(rightKey) && Input.GetKey(leftKey)) ||
-            (Input.GetKey(rightAltKey) && Input.GetKey(leftAltKey)))
+        if ((Input.GetKeyDown(rightKey) && Input.GetKeyDown(leftKey)) ||
+            (Input.GetKeyDown(rightAltKey) && Input.GetKeyDown(leftAltKey)))
         {
             Invertbool();
             RefreshSceneInvertion();
@@ -100,11 +101,18 @@ public class GameManager : MonoBehaviour
 
     private void RefreshSceneInvertion()
     {
-        foreach (var element in GameObject.FindGameObjectsWithTag("NegItem"))
+
+
+        List<GameObject> negList = 
+            new List<GameObject>(GameObject.FindGameObjectsWithTag("NegItem"));
+        List<GameObject> posList = 
+            new List<GameObject>(GameObject.FindGameObjectsWithTag("PosItem"));
+        
+        foreach (var element in negList)
         {
             element.SetActive(inInvertedMode);
         }
-        foreach (var element in GameObject.FindGameObjectsWithTag("PosItem"))
+        foreach (var element in posList)
         {
             element.SetActive(!inInvertedMode);
         }
