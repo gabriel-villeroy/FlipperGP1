@@ -25,9 +25,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private TMP_Text ballLeftText;
-    [SerializeField] private float holdTime = 1f;
-    private float timeHeld;
-    private bool inInvertedMode;
+    
+    [Header("Invertion")]
+    public bool inInvertedMode;
+
+    [SerializeField] private List<GameObject> negList = new List<GameObject>();
+    [SerializeField] private List<GameObject> posList = new List<GameObject>();
+    
+    [Header("General")]
+    public GameState currentGameState = GameState.Game;
 
     public enum GameState
     {
@@ -36,8 +42,6 @@ public class GameManager : MonoBehaviour
         GameOver
     }
 
-    public GameState currentGameState = GameState.Game;
-
     private void Awake()
     {
         Instance = this;
@@ -45,7 +49,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        currentGameState = GameState.Game;
+        currentGameState = GameState.Game; 
+        refObjectsToInvert();
         RefreshSceneInvertion();
         SpawnBall();
     }
@@ -99,20 +104,19 @@ public class GameManager : MonoBehaviour
         inInvertedMode =! inInvertedMode;
     }
 
+    private void refObjectsToInvert()
+    {
+        negList = new List<GameObject>(GameObject.FindGameObjectsWithTag("NegItem"));
+        posList = new List<GameObject>(GameObject.FindGameObjectsWithTag("PosItem"));
+    }
+
     private void RefreshSceneInvertion()
     {
-
-
-        List<GameObject> negList = 
-            new List<GameObject>(GameObject.FindGameObjectsWithTag("NegItem"));
-        List<GameObject> posList = 
-            new List<GameObject>(GameObject.FindGameObjectsWithTag("PosItem"));
-        
-        foreach (var element in negList)
+        foreach (GameObject element in negList)
         {
             element.SetActive(inInvertedMode);
         }
-        foreach (var element in posList)
+        foreach (GameObject element in posList)
         {
             element.SetActive(!inInvertedMode);
         }
