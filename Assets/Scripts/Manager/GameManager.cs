@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public KeyCode rightAltKey;
     public KeyCode leftKey;
     public KeyCode leftAltKey;
+    public KeyCode invertKey;
     
     [Header("Ball")]
     [SerializeField] private GameObject ball;
@@ -29,8 +30,8 @@ public class GameManager : MonoBehaviour
     [Header("Invertion")]
     public bool inInvertedMode;
 
-    [SerializeField] private List<GameObject> negList = new List<GameObject>();
-    [SerializeField] private List<GameObject> posList = new List<GameObject>();
+    [NonSerialized] public List<GameObject> invertedList = new List<GameObject>();
+    [NonSerialized] public List<GameObject> regularList = new List<GameObject>();
     
     [Header("General")]
     public GameState currentGameState = GameState.Game;
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         currentGameState = GameState.Game; 
-        refObjectsToInvert();
+        ListObjectsProneToInvert();
         RefreshSceneInvertion();
         SpawnBall();
     }
@@ -91,8 +92,7 @@ public class GameManager : MonoBehaviour
 
     private void InvertModeInput()
     {
-        if ((Input.GetKeyDown(rightKey) && Input.GetKeyDown(leftKey)) ||
-            (Input.GetKeyDown(rightAltKey) && Input.GetKeyDown(leftAltKey)))
+        if (Input.GetKeyDown(invertKey))
         {
             Invertbool();
             RefreshSceneInvertion();
@@ -104,19 +104,19 @@ public class GameManager : MonoBehaviour
         inInvertedMode =! inInvertedMode;
     }
 
-    private void refObjectsToInvert()
+    private void ListObjectsProneToInvert()
     {
-        negList = new List<GameObject>(GameObject.FindGameObjectsWithTag("NegItem"));
-        posList = new List<GameObject>(GameObject.FindGameObjectsWithTag("PosItem"));
+        invertedList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Inverted"));
+        regularList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Uninverted"));
     }
 
     private void RefreshSceneInvertion()
     {
-        foreach (GameObject element in negList)
+        foreach (GameObject element in invertedList)
         {
             element.SetActive(inInvertedMode);
         }
-        foreach (GameObject element in posList)
+        foreach (GameObject element in regularList)
         {
             element.SetActive(!inInvertedMode);
         }

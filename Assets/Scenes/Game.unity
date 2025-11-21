@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 189521903}
   m_Layer: 7
   m_Name: Bumper
-  m_TagString: NormItem
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 294518369}
   m_Layer: 7
   m_Name: Bumper (1)
-  m_TagString: NegItem
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1606,7 +1606,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ball Left
+  m_text: Ball Left M8
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8419b1ad38dc7db42b32fdba64610e9f, type: 2}
   m_sharedMaterial: {fileID: 3512047731364292740, guid: 8419b1ad38dc7db42b32fdba64610e9f, type: 2}
@@ -1700,7 +1700,7 @@ GameObject:
   - component: {fileID: 561720566}
   m_Layer: 7
   m_Name: Bumper (2)
-  m_TagString: PosItem
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2051,6 +2051,7 @@ GameObject:
   - component: {fileID: 815353478}
   - component: {fileID: 815353477}
   - component: {fileID: 815353476}
+  - component: {fileID: 815353479}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2089,6 +2090,7 @@ MonoBehaviour:
   rightAltKey: 303
   leftKey: 276
   leftAltKey: 304
+  invertKey: 0
   ball: {fileID: 3785102622087268406, guid: d493228b2ff13364889b236097caf268, type: 3}
   spawnPoint: {fileID: 1575904920}
   ballLeft: 3
@@ -2097,8 +2099,6 @@ MonoBehaviour:
   pausePanel: {fileID: 1425525783}
   ballLeftText: {fileID: 554205785}
   inInvertedMode: 0
-  negList: []
-  posList: []
   currentGameState: 0
 --- !u!4 &815353478
 Transform:
@@ -2115,6 +2115,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &815353479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815353475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef9fa6ef129b4b49b1766b8b13c0f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  net_mainColor: {r: 0, g: 0, b: 0, a: 0}
+  uni_mainColor: {r: 0, g: 0, b: 0, a: 0}
+  uni_secondaryColor: {r: 0, g: 0, b: 0, a: 0}
+  inv_mainColor: {r: 0, g: 0, b: 0, a: 0}
+  inv_secondaryColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &823949284
 GameObject:
   m_ObjectHideFlags: 0

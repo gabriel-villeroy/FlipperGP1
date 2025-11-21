@@ -4,9 +4,11 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - NormItem
-  - PosItem
-  - NegItem
+  - Constant
+  - Uninverted
+  - Inverted
+  - Primary
+  - Secondary
   layers:
   - Default
   - TransparentFX
