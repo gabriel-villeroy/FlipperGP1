@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PaletteManager : MonoBehaviour
 {
+    public static PaletteManager Instance;
+    
     [Header("neutral colors")] 
     [SerializeField] private Color net_mainColor;
         
@@ -15,24 +17,24 @@ public class PaletteManager : MonoBehaviour
     [SerializeField] private Color inv_mainColor;
     [SerializeField] private Color inv_secondaryColor;
     
-    private List<GameObject> primaryObjList = new List<GameObject>();
-    private List<GameObject> secondaryObjList = new List<GameObject>();
-
-    private void Start()
+    public List<GameObject> primaryObjList = new List<GameObject>();
+    public List<GameObject> secondaryObjList = new List<GameObject>();
+    
+    private void Awake()
     {
-        ListObjAndMeshes();
+        Instance = this;
     }
 
     private void Update()
     {
-        
+        setMaterialColor();
     }
 
     private void setMaterialColor()
     {
         Color mainColor;
         Color secColor;
-        switch (GameManager.Instance.inInvertedMode)
+        switch (!GameManager.Instance.onAside)
         {
             case (false):
             {
@@ -47,13 +49,13 @@ public class PaletteManager : MonoBehaviour
                 break;
             }
         }
-
-
+        
         if (primaryObjList.Count != 0)
         {
             for (int i = 0; i < primaryObjList.Count; i++)
             {
                 primaryObjList[i].gameObject.GetComponent<MeshRenderer>().material.color = mainColor;
+                Debug.Log("téla ?");
             }
         }
 
@@ -64,11 +66,5 @@ public class PaletteManager : MonoBehaviour
                 secondaryObjList[i].gameObject.GetComponent<MeshRenderer>().material.color = secColor;
             }
         }
-    }
-
-    private void ListObjAndMeshes()
-    {
-        primaryObjList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Primary"));
-        secondaryObjList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Secondary"));
     }
 }

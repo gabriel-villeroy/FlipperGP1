@@ -531,6 +531,7 @@ GameObject:
   - component: {fileID: 189521905}
   - component: {fileID: 189521904}
   - component: {fileID: 189521903}
+  - component: {fileID: 189521907}
   m_Layer: 7
   m_Name: Bumper
   m_TagString: Untagged
@@ -642,6 +643,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189521901}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &189521907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189521901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e9f35098f09ce42a405885636f4e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cp: 0
+  activeConstacy: 1
 --- !u!1 &200687133
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,6 +958,7 @@ GameObject:
   - component: {fileID: 294518371}
   - component: {fileID: 294518370}
   - component: {fileID: 294518369}
+  - component: {fileID: 294518373}
   m_Layer: 7
   m_Name: Bumper (1)
   m_TagString: Untagged
@@ -1054,6 +1070,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294518367}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &294518373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294518367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e9f35098f09ce42a405885636f4e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cp: 0
+  activeConstacy: 2
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,7 +1636,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ball Left M8
+  m_text: Ball Left
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8419b1ad38dc7db42b32fdba64610e9f, type: 2}
   m_sharedMaterial: {fileID: 3512047731364292740, guid: 8419b1ad38dc7db42b32fdba64610e9f, type: 2}
@@ -1698,6 +1728,7 @@ GameObject:
   - component: {fileID: 561720568}
   - component: {fileID: 561720567}
   - component: {fileID: 561720566}
+  - component: {fileID: 561720570}
   m_Layer: 7
   m_Name: Bumper (2)
   m_TagString: Untagged
@@ -1809,6 +1840,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561720564}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &561720570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561720564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e9f35098f09ce42a405885636f4e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cp: 0
+  activeConstacy: 0
 --- !u!1 &646084222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,6 +1907,7 @@ GameObject:
   - component: {fileID: 701373519}
   - component: {fileID: 701373520}
   - component: {fileID: 701373521}
+  - component: {fileID: 701373522}
   m_Layer: 6
   m_Name: LPaddle
   m_TagString: Untagged
@@ -2040,6 +2086,20 @@ MonoBehaviour:
   altKey: 0
   targetPosition: 30
   originPosition: 0
+--- !u!114 &701373522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701373514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e9f35098f09ce42a405885636f4e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cp: 0
+  activeConstacy: 0
 --- !u!1 &815353475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,7 +2150,7 @@ MonoBehaviour:
   rightAltKey: 303
   leftKey: 276
   leftAltKey: 304
-  invertKey: 0
+  switchKey: 32
   ball: {fileID: 3785102622087268406, guid: d493228b2ff13364889b236097caf268, type: 3}
   spawnPoint: {fileID: 1575904920}
   ballLeft: 3
@@ -2098,7 +2158,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 219719063}
   pausePanel: {fileID: 1425525783}
   ballLeftText: {fileID: 554205785}
-  inInvertedMode: 0
+  onAside: 0
   currentGameState: 0
 --- !u!4 &815353478
 Transform:
@@ -2127,11 +2187,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef9fa6ef129b4b49b1766b8b13c0f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  net_mainColor: {r: 0, g: 0, b: 0, a: 0}
-  uni_mainColor: {r: 0, g: 0, b: 0, a: 0}
-  uni_secondaryColor: {r: 0, g: 0, b: 0, a: 0}
-  inv_mainColor: {r: 0, g: 0, b: 0, a: 0}
-  inv_secondaryColor: {r: 0, g: 0, b: 0, a: 0}
+  net_mainColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 0}
+  uni_mainColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 0}
+  uni_secondaryColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0}
+  inv_mainColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 0}
+  inv_secondaryColor: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 0}
+  primaryObjList: []
+  secondaryObjList: []
 --- !u!1 &823949284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2714,6 +2776,7 @@ GameObject:
   - component: {fileID: 1052287278}
   - component: {fileID: 1052287279}
   - component: {fileID: 1052287280}
+  - component: {fileID: 1052287281}
   m_Layer: 6
   m_Name: RPaddle
   m_TagString: Untagged
@@ -2892,6 +2955,20 @@ MonoBehaviour:
   altKey: 0
   targetPosition: 30
   originPosition: 0
+--- !u!114 &1052287281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052287273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e9f35098f09ce42a405885636f4e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cp: 0
+  activeConstacy: 0
 --- !u!1 &1082568291
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public KeyCode rightAltKey;
     public KeyCode leftKey;
     public KeyCode leftAltKey;
-    public KeyCode invertKey;
+    public KeyCode switchKey;
     
     [Header("Ball")]
     [SerializeField] private GameObject ball;
@@ -26,15 +26,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private TMP_Text ballLeftText;
-    
-    [Header("Invertion")]
-    public bool inInvertedMode;
 
-    [NonSerialized] public List<GameObject> invertedList = new List<GameObject>();
-    [NonSerialized] public List<GameObject> regularList = new List<GameObject>();
+    [Header("SideManagement")] 
+    public bool onAside;
+
+    [NonSerialized] public List<GameObject> AsideList = new List<GameObject>();
+    [NonSerialized] public List<GameObject> BsideList = new List<GameObject>();
+
     
     [Header("General")]
-    public GameState currentGameState = GameState.Game;
+    public GameState currentGameState;
 
     public enum GameState
     {
@@ -50,15 +51,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        currentGameState = GameState.Game; 
-        ListObjectsProneToInvert();
-        RefreshSceneInvertion();
+        setActiveObjectsOfCurrentSide();
         SpawnBall();
     }
 
     void Update()
     {
-        InvertModeInput();
+        SwitchSideInput();
         DisplayBallCount();
         if (ballLeft == 0)
         { 
@@ -88,37 +87,31 @@ public class GameManager : MonoBehaviour
     }
     
     
-    //Invert
+    //SideManagement
 
-    private void InvertModeInput()
+    private void SwitchSideInput()
     {
-        if (Input.GetKeyDown(invertKey))
+        if (Input.GetKeyDown(switchKey))
         {
             Invertbool();
-            RefreshSceneInvertion();
+            setActiveObjectsOfCurrentSide();
         }
     }
     
     private void Invertbool()
     {
-        inInvertedMode =! inInvertedMode;
+        onAside = !onAside;
     }
 
-    private void ListObjectsProneToInvert()
+    private void setActiveObjectsOfCurrentSide()
     {
-        invertedList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Inverted"));
-        regularList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Uninverted"));
-    }
-
-    private void RefreshSceneInvertion()
-    {
-        foreach (GameObject element in invertedList)
+        foreach (GameObject element in BsideList)
         {
-            element.SetActive(inInvertedMode);
+            element.SetActive(onAside);
         }
-        foreach (GameObject element in regularList)
+        foreach (GameObject element in AsideList)
         {
-            element.SetActive(!inInvertedMode);
+            element.SetActive(!onAside);
         }
     }
     
