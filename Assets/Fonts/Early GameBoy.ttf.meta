@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7a31960abec6b7849867b8338d939e08
+guid: 1a9decfd5f1e8e645873a3c588d19a07
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - a Another Tag
+  - Early GameBoy
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
