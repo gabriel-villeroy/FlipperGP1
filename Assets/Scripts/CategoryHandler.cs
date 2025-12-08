@@ -6,6 +6,7 @@ public class CategoryHandler : MonoBehaviour
 {
     public enum colorPriority
     {
+        ForeGround,
         Primary,
         Secondary
     }
@@ -19,11 +20,12 @@ public class CategoryHandler : MonoBehaviour
     }
     public activeStateConstancy activeConstacy;
     
-    void Awake()
+    void Start()
     {
-        if (cp == colorPriority.Primary) PaletteManager.Instance.primaryObjList.Add(gameObject);
-        if (cp == colorPriority.Secondary) PaletteManager.Instance.secondaryObjList.Add(gameObject);
         if (activeConstacy == activeStateConstancy.Aside) GameManager.Instance.AsideList.Add(gameObject);
         if (activeConstacy == activeStateConstancy.Bside) GameManager.Instance.BsideList.Add(gameObject);
+        if (cp == colorPriority.ForeGround) PaletteManager.Instance.foregroundObjList.Add(gameObject);
+        if (cp == colorPriority.Primary) PaletteManager.Instance.primaryObjList.Add(gameObject);
+        if (cp == colorPriority.Secondary) PaletteManager.Instance.secondaryObjList.Add(gameObject);
     }
 }

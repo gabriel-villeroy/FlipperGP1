@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint; 
     public int ballLeft = 3;
     public bool ballInScene;
-    private GameObject currentBall;
+    public GameObject currentBall;
     
     [Header("UI")] 
     [SerializeField] private GameObject gameOverPanel;
@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        PaletteManager.Instance.UIObjList.Add(ballLeftText);
         setActiveObjectsOfCurrentSide();
         SpawnBall();
     }

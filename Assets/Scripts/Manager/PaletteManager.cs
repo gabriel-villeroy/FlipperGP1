@@ -1,52 +1,101 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PaletteManager : MonoBehaviour
 {
     public static PaletteManager Instance;
     
-    [Header("neutral colors")] 
-    [SerializeField] private Color net_mainColor;
-        
-    [Header("regular colors")]
-    [SerializeField] private Color uni_mainColor;
-    [SerializeField] private Color uni_secondaryColor;
+    [Header("A side colors")]
+    [SerializeField] private Color A_UIColor;
+    [SerializeField] private Color A_foregroundColor;
+    [SerializeField] private Color A_ballColor;
+    [SerializeField] private Color A_primaryColor;
+    [SerializeField] private Color A_secondaryColor;
+    [SerializeField] private Color A_backgroundColor;
     
-    [Header("inverted colors")]
-    [SerializeField] private Color inv_mainColor;
-    [SerializeField] private Color inv_secondaryColor;
+    [Header("B side colors")]
+    [SerializeField] private Color B_UIColor;
+    [SerializeField] private Color B_foregroundColor;
+    [SerializeField] private Color B_ballColor;
+    [SerializeField] private Color B_primaryColor;
+    [SerializeField] private Color B_secondaryColor;
+    [SerializeField] private Color B_backgroundColor;
     
+    public List<TMP_Text> UIObjList = new List<TMP_Text>();
+    public List<GameObject> foregroundObjList = new List<GameObject>();
     public List<GameObject> primaryObjList = new List<GameObject>();
     public List<GameObject> secondaryObjList = new List<GameObject>();
+
+    //[Header("References")]
+    private Camera camRef;
     
     private void Awake()
     {
         Instance = this;
+        camRef = FindAnyObjectByType<Camera>();
     }
 
-    private void Update()
+    private void Start()
     {
         setMaterialColor();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(GameManager.Instance.switchKey))
+        {
+            setMaterialColor();
+        }
+    }
+
     private void setMaterialColor()
     {
-        Color mainColor;
+        Color uiColor;
+        Color fgColor;
+        Color ballColor;
+        Color primColor;
         Color secColor;
+        Color bgColor;
+        
         switch (!GameManager.Instance.onAside)
         {
             case (false):
             {
-                mainColor = uni_mainColor;
-                secColor = uni_secondaryColor;
+                uiColor = A_UIColor;
+                fgColor = A_foregroundColor;
+                ballColor = A_ballColor;
+                primColor = A_primaryColor;
+                secColor = A_secondaryColor;
+                bgColor = A_backgroundColor;
                 break;
             }
             case (true):
             {
-                mainColor = inv_mainColor;
-                secColor = inv_secondaryColor;
+                uiColor = B_UIColor;
+                fgColor = B_foregroundColor;
+                ballColor = B_ballColor;
+                primColor = B_primaryColor;
+                secColor = B_secondaryColor;
+                bgColor = B_backgroundColor;
                 break;
+            }
+        }
+        
+        if (UIObjList.Count != 0)
+        {
+            for (int i = 0; i < UIObjList.Count; i++)
+            {
+                UIObjList[i].color = uiColor;
+            }
+        }
+        
+        if (foregroundObjList.Count != 0)
+        {
+            for (int i = 0; i < foregroundObjList.Count; i++)
+            {
+                foregroundObjList[i].gameObject.GetComponent<MeshRenderer>().material.color = fgColor;
             }
         }
         
@@ -54,8 +103,7 @@ public class PaletteManager : MonoBehaviour
         {
             for (int i = 0; i < primaryObjList.Count; i++)
             {
-                primaryObjList[i].gameObject.GetComponent<MeshRenderer>().material.color = mainColor;
-                Debug.Log("téla ?");
+                primaryObjList[i].gameObject.GetComponent<MeshRenderer>().material.color = primColor;
             }
         }
 
@@ -65,6 +113,14 @@ public class PaletteManager : MonoBehaviour
             {
                 secondaryObjList[i].gameObject.GetComponent<MeshRenderer>().material.color = secColor;
             }
+        }
+        
+        //bgColor
+        camRef.backgroundColor = bgColor;
+        //ballColor
+        if(GameManager.Instance.currentBall != null)
+        {
+            GameManager.Instance.currentBall.GetComponent<MeshRenderer>().material.color = ballColor;
         }
     }
 }
