@@ -39,18 +39,15 @@ public class PaletteManager : MonoBehaviour
 
     private void Start()
     {
-        setMaterialColor();
+        InitMaterialColor();
     }
 
-    private void Update()
+    public void InitMaterialColor()
     {
-        if (Input.GetKeyDown(GameManager.Instance.switchKey))
-        {
-            setMaterialColor();
-        }
+        
     }
-
-    private void setMaterialColor()
+    
+    public void setMaterialColor()
     {
         Color uiColor;
         Color fgColor;
@@ -117,10 +114,14 @@ public class PaletteManager : MonoBehaviour
         
         //bgColor
         camRef.backgroundColor = bgColor;
+        
         //ballColor
         if(GameManager.Instance.currentBall != null)
         {
             GameManager.Instance.currentBall.GetComponent<MeshRenderer>().material.color = ballColor;
         }
     }
+
+    public Action swapToA;
+    public Action swapToB;
 }

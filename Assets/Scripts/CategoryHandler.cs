@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEditor.Search;
 using UnityEngine;
@@ -27,5 +28,35 @@ public class CategoryHandler : MonoBehaviour
         if (cp == colorPriority.ForeGround) PaletteManager.Instance.foregroundObjList.Add(gameObject);
         if (cp == colorPriority.Primary) PaletteManager.Instance.primaryObjList.Add(gameObject);
         if (cp == colorPriority.Secondary) PaletteManager.Instance.secondaryObjList.Add(gameObject);
+
+        switch (activeConstacy)
+        {
+            case activeStateConstancy.Aside : 
+                PaletteManager.Instance.swapToA += Show;
+                PaletteManager.Instance.swapToB += Hide;
+                break;
+            case activeStateConstancy.Bside : 
+                PaletteManager.Instance.swapToA += Hide;
+                PaletteManager.Instance.swapToB += Show;
+                break;
+        }
     }
+
+    private void OnDestroy()
+    {
+        switch (activeConstacy)
+        {
+            case activeStateConstancy.Aside : 
+                PaletteManager.Instance.swapToA -= Show;
+                PaletteManager.Instance.swapToB -= Hide;
+                break;
+            case activeStateConstancy.Bside : 
+                PaletteManager.Instance.swapToA -= Hide;
+                PaletteManager.Instance.swapToB -= Show;
+                break;
+        }
+    }
+
+    private void Show() => gameObject.SetActive(true);
+    private void Hide() => gameObject.SetActive(false);
 }

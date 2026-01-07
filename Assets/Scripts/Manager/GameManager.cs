@@ -7,13 +7,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
-    [Header("Keys")] 
-    public KeyCode rightKey;
-    public KeyCode rightAltKey;
-    public KeyCode leftKey;
-    public KeyCode leftAltKey;
-    public KeyCode switchKey;
     
     [Header("Ball")]
     [SerializeField] private GameObject ball;
@@ -43,7 +36,10 @@ public class GameManager : MonoBehaviour
         Pause,
         GameOver
     }
-
+    
+    
+    //
+    
     private void Awake()
     {
         Instance = this;
@@ -58,21 +54,19 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        SwitchSideInput();
         DisplayBallCount();
-        if (ballLeft == 0)
-        { 
-            GameOver();
+        if (ballLeft == 0 && currentGameState != GameState.GameOver)
+        {
+            SetGameOverPanel();
             return;
         }
         if (!ballInScene)
         { 
             SpawnBall();
         }
-        PauseInputs();
     }
-
-        
+    
+    
     //Game
     
     private void SpawnBall()
@@ -89,22 +83,13 @@ public class GameManager : MonoBehaviour
     
     
     //SideManagement
-
-    private void SwitchSideInput()
-    {
-        if (Input.GetKeyDown(switchKey))
-        {
-            Invertbool();
-            setActiveObjectsOfCurrentSide();
-        }
-    }
     
-    private void Invertbool()
+    public void Invertbool()
     {
         onAside = !onAside;
     }
 
-    private void setActiveObjectsOfCurrentSide()
+    public void setActiveObjectsOfCurrentSide()
     {
         foreach (GameObject element in BsideList)
         {
@@ -119,7 +104,7 @@ public class GameManager : MonoBehaviour
     
     //PauseMenu
 
-    private void SetPause(bool paused)
+    public void SetPause(bool paused)
     {
         if (paused)
         {
@@ -133,55 +118,14 @@ public class GameManager : MonoBehaviour
         }
         pausePanel.SetActive(!pausePanel.activeSelf);
     }
-
-    private void PauseInputs()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SetPause(currentGameState != GameState.Pause);
-        }
-
-        if (currentGameState == GameState.Pause)
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                LoadMenu();
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Quit();
-            }
-        }
-    }
     
     
     //GameOver
     
-    public void GameOverPanelInputs()
+    private void SetGameOverPanel()
     {
-        if (Input.GetKey(KeyCode.R))
-        {
-            Retry();
-        }
-        if (Input.GetKey(KeyCode.Tab))
-        {
-            LoadMenu();
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Quit();
-        }
-    }
-    
-    private void GameOver()
-    {
-        if (currentGameState != GameState.GameOver)
-        {
-            currentGameState = GameState.GameOver;
-            gameOverPanel.SetActive(true);
-        }
-        GameOverPanelInputs();
+        currentGameState = GameState.GameOver;
+        gameOverPanel.SetActive(true);
     }
     
     

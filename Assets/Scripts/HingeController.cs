@@ -1,15 +1,14 @@
+using System;
 using UnityEngine;
 
 public class HingeController : MonoBehaviour
 {
-    HingeJoint hingeJoint;
-    [SerializeField] private KeyCode key;
-    [SerializeField] private KeyCode altKey;
+    new HingeJoint hingeJoint;
 
     [SerializeField] float targetPosition = 75f;
     [SerializeField] float originPosition;
 
-    private bool isRightPaddle;
+    public bool isRightPaddle;
     
     JointSpring jointSpring;
     
@@ -17,42 +16,13 @@ public class HingeController : MonoBehaviour
     {
         hingeJoint = GetComponent<HingeJoint>();
         jointSpring = hingeJoint.spring;
-        CheckPaddlePosition(gameObject.name); 
-        SetInputKey();
     }
-
-    void Update()
+    
+    public void LiftPaddle(bool lift)
     {
-        if (Input.GetKey(key) || Input.GetKey(altKey))
-        {
-            jointSpring.targetPosition = targetPosition;
-        }
-        else
-        {
-            jointSpring.targetPosition = originPosition;
-        }
-
+        if (lift) jointSpring.targetPosition = targetPosition;
+        else jointSpring.targetPosition = originPosition;
+        
         hingeJoint.spring = jointSpring;
-    }
-
-    void CheckPaddlePosition(string objName)
-    {
-        if (objName == "RPaddle") isRightPaddle = true;
-        else if (objName == "LPaddle") isRightPaddle = false;
-        else Debug.LogError("paddle name(s) incorrect !");
-    }
-
-    void SetInputKey()
-    {
-        if (isRightPaddle)
-        {
-            key = GameManager.Instance.rightKey;
-            altKey = GameManager.Instance.rightAltKey;
-        }
-        else
-        {
-            key = GameManager.Instance.leftKey;
-            altKey = GameManager.Instance.leftAltKey;
-        }
     }
 }

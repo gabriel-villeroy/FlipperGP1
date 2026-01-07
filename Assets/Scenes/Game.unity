@@ -2237,10 +2237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f1e3a93093e9e4ab7409602643b1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: 0
-  altKey: 0
   targetPosition: 30
   originPosition: 0
+  isRightPaddle: 0
 --- !u!114 &701373522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2267,6 +2266,7 @@ GameObject:
   - component: {fileID: 815353477}
   - component: {fileID: 815353476}
   - component: {fileID: 815353479}
+  - component: {fileID: 815353480}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2359,6 +2359,25 @@ MonoBehaviour:
   foregroundObjList: []
   primaryObjList: []
   secondaryObjList: []
+--- !u!114 &815353480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815353475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be709cb53be49844a539abd4154969a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightKey: 275
+  rightAltKey: 303
+  leftKey: 276
+  leftAltKey: 304
+  switchKey: 32
+  rightPaddleRef: {fileID: 1052287273}
+  leftPaddleRef: {fileID: 701373514}
 --- !u!1 &823949284
 GameObject:
   m_ObjectHideFlags: 0
@@ -3131,10 +3150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f1e3a93093e9e4ab7409602643b1a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: 0
-  altKey: 0
   targetPosition: 30
   originPosition: 0
+  isRightPaddle: 0
 --- !u!114 &1052287281
 MonoBehaviour:
   m_ObjectHideFlags: 0
