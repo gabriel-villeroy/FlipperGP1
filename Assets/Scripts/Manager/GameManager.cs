@@ -34,7 +34,8 @@ public class GameManager : MonoBehaviour
     {
         Game,
         Pause,
-        GameOver
+        GameOver,
+        Win
     }
     
     
@@ -47,7 +48,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        PaletteManager.Instance.UIObjList.Add(ballLeftText);
         setActiveObjectsOfCurrentSide();
         SpawnBall();
     }
@@ -73,6 +73,14 @@ public class GameManager : MonoBehaviour
     {
         currentBall = Instantiate(ball, spawnPoint.position, Quaternion.identity);
         currentBall.layer = 3;
+        if (onAside)
+        {
+            currentBall.GetComponent<MeshRenderer>().material.color = PaletteManager.Instance.B_ballColor;
+        }
+        else
+        {
+            currentBall.GetComponent<MeshRenderer>().material.color = PaletteManager.Instance.B_ballColor;
+        }
         ballInScene = true;
     }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,119 +9,56 @@ public class PaletteManager : MonoBehaviour
     public static PaletteManager Instance;
     
     [Header("A side colors")]
-    [SerializeField] private Color A_UIColor;
-    [SerializeField] private Color A_foregroundColor;
-    [SerializeField] private Color A_ballColor;
-    [SerializeField] private Color A_primaryColor;
-    [SerializeField] private Color A_secondaryColor;
-    [SerializeField] private Color A_backgroundColor;
+    public Color A_UIColor;
+    public Color A_FinishColor;
+    public Color A_foregroundColor;
+    public Color A_ballColor;
+    public Color A_primaryColor;
+    public Color A_secondaryColor;
+    public Color A_backgroundColor;
     
     [Header("B side colors")]
-    [SerializeField] private Color B_UIColor;
-    [SerializeField] private Color B_foregroundColor;
-    [SerializeField] private Color B_ballColor;
-    [SerializeField] private Color B_primaryColor;
-    [SerializeField] private Color B_secondaryColor;
-    [SerializeField] private Color B_backgroundColor;
+    public Color B_UIColor;
+    public Color B_FinishColor;
+    public Color B_foregroundColor;
+    public Color B_ballColor;
+    public Color B_primaryColor;
+    public Color B_secondaryColor;
+    public Color B_backgroundColor;
     
-    public List<TMP_Text> UIObjList = new List<TMP_Text>();
-    public List<GameObject> foregroundObjList = new List<GameObject>();
-    public List<GameObject> primaryObjList = new List<GameObject>();
-    public List<GameObject> secondaryObjList = new List<GameObject>();
-
     //[Header("References")]
     private Camera camRef;
+    private InputManager inputManager;
     
     private void Awake()
     {
         Instance = this;
         camRef = FindAnyObjectByType<Camera>();
+        inputManager = GetComponent<InputManager>();
     }
 
     private void Start()
     {
-        InitMaterialColor();
+        StartCoroutine(InitLevel());
+        swapToA += SetColor_bg_A;
+        swapToB += SetColor_bg_B;
     }
 
-    public void InitMaterialColor()
+    private IEnumerator InitLevel()
     {
-        
+        yield return new WaitForSeconds(0.01f);
+        swapToA.Invoke();
+    }
+
+    public void SetColor_bg_A()
+    {
+        camRef.backgroundColor = A_backgroundColor;
+    }
+    public void SetColor_bg_B()
+    {
+        camRef.backgroundColor = B_backgroundColor;
     }
     
-    public void setMaterialColor()
-    {
-        Color uiColor;
-        Color fgColor;
-        Color ballColor;
-        Color primColor;
-        Color secColor;
-        Color bgColor;
-        
-        switch (!GameManager.Instance.onAside)
-        {
-            case (false):
-            {
-                uiColor = A_UIColor;
-                fgColor = A_foregroundColor;
-                ballColor = A_ballColor;
-                primColor = A_primaryColor;
-                secColor = A_secondaryColor;
-                bgColor = A_backgroundColor;
-                break;
-            }
-            case (true):
-            {
-                uiColor = B_UIColor;
-                fgColor = B_foregroundColor;
-                ballColor = B_ballColor;
-                primColor = B_primaryColor;
-                secColor = B_secondaryColor;
-                bgColor = B_backgroundColor;
-                break;
-            }
-        }
-        
-        if (UIObjList.Count != 0)
-        {
-            for (int i = 0; i < UIObjList.Count; i++)
-            {
-                UIObjList[i].color = uiColor;
-            }
-        }
-        
-        if (foregroundObjList.Count != 0)
-        {
-            for (int i = 0; i < foregroundObjList.Count; i++)
-            {
-                foregroundObjList[i].gameObject.GetComponent<MeshRenderer>().material.color = fgColor;
-            }
-        }
-        
-        if (primaryObjList.Count != 0)
-        {
-            for (int i = 0; i < primaryObjList.Count; i++)
-            {
-                primaryObjList[i].gameObject.GetComponent<MeshRenderer>().material.color = primColor;
-            }
-        }
-
-        if (secondaryObjList.Count != 0)
-        {
-            for (int i = 0; i < secondaryObjList.Count; i++)
-            {
-                secondaryObjList[i].gameObject.GetComponent<MeshRenderer>().material.color = secColor;
-            }
-        }
-        
-        //bgColor
-        camRef.backgroundColor = bgColor;
-        
-        //ballColor
-        if(GameManager.Instance.currentBall != null)
-        {
-            GameManager.Instance.currentBall.GetComponent<MeshRenderer>().material.color = ballColor;
-        }
-    }
 
     public Action swapToA;
     public Action swapToB;

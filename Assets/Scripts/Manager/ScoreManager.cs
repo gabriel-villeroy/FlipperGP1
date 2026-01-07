@@ -16,11 +16,6 @@ public class ScoreManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        PaletteManager.Instance.UIObjList.Add(scoreText);
-    }
-
     private void Update()
     {
         scoreText.text = score.ToString();

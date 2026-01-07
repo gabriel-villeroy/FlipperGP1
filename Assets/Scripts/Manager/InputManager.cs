@@ -37,7 +37,14 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(switchKey))
         {
-            paletteManager.setMaterialColor();
+            if (GameManager.Instance.onAside)
+            {
+                paletteManager.swapToB.Invoke();
+            }
+            else
+            {
+                paletteManager.swapToA.Invoke();
+            }
         }
         
         if (GameManager.Instance.ballLeft == 0)
