@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform spawnPoint; 
     public int ballLeft = 3;
     public bool ballInScene;
-    public GameObject currentBall;
+    [NonSerialized] public GameObject currentBall;
+    [NonSerialized] public Shooter shooter;
     
     [Header("UI")] 
     [SerializeField] private GameObject gameOverPanel;
@@ -21,11 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text ballLeftText;
 
     [Header("SideManagement")] 
-    public bool onAside;
-
-    [NonSerialized] public List<GameObject> AsideList = new List<GameObject>();
-    [NonSerialized] public List<GameObject> BsideList = new List<GameObject>();
-
+    public bool onAside; 
     
     [Header("General")]
     public GameState currentGameState;
@@ -33,6 +30,7 @@ public class GameManager : MonoBehaviour
     public enum GameState
     {
         Game,
+        Shooting,
         Pause,
         GameOver,
         Win
@@ -63,7 +61,9 @@ public class GameManager : MonoBehaviour
             return;
         }
         if (!ballInScene)
-        { 
+        {
+            currentGameState = GameState.Shooting;
+            shooter.EnableShooter();
             SpawnBall();
         }
     }
@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
         if (onAside)
         {
             currentBall.GetComponent<MeshRenderer>().material.color = PaletteManager.Instance.A_ballColor;
-         }
+        }
         else
         {
             currentBall.GetComponent<MeshRenderer>().material.color = PaletteManager.Instance.B_ballColor;
@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour
     
     public void Retry()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
