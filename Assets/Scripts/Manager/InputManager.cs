@@ -32,7 +32,6 @@ public class InputManager : MonoBehaviour
         if (GameManager.Instance.currentGameState == GameManager.GameState.Game)
         {
             PaddleInputFuncCalls();
-            SwitchSideInput();
         }
 
         if (Input.GetKeyDown(switchKey))
@@ -75,18 +74,6 @@ public class InputManager : MonoBehaviour
             {
                 GameManager.Instance.Quit();
             }
-        }
-    }
-    
-    
-    //SideManagement
-    
-    private void SwitchSideInput()
-    {
-        if (Input.GetKeyDown(switchKey))
-        {
-            GameManager.Instance.Invertbool();
-            GameManager.Instance.setActiveObjectsOfCurrentSide();
         }
     }
     

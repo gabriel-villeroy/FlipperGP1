@@ -48,7 +48,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        setActiveObjectsOfCurrentSide();
+        PaletteManager.Instance.swapToA += switchToA;
+        PaletteManager.Instance.swapToB += switchToB;
         SpawnBall();
     }
 
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
         DisplayBallCount();
         if (ballLeft == 0 && currentGameState != GameState.GameOver)
         {
+            Time.timeScale = 0;
             SetGameOverPanel();
             return;
         }
@@ -75,8 +77,8 @@ public class GameManager : MonoBehaviour
         currentBall.layer = 3;
         if (onAside)
         {
-            currentBall.GetComponent<MeshRenderer>().material.color = PaletteManager.Instance.B_ballColor;
-        }
+            currentBall.GetComponent<MeshRenderer>().material.color = PaletteManager.Instance.A_ballColor;
+         }
         else
         {
             currentBall.GetComponent<MeshRenderer>().material.color = PaletteManager.Instance.B_ballColor;
@@ -92,23 +94,14 @@ public class GameManager : MonoBehaviour
     
     //SideManagement
     
-    public void Invertbool()
+    public void switchToA()
     {
-        onAside = !onAside;
+        onAside = true;
     }
-
-    public void setActiveObjectsOfCurrentSide()
+    public void switchToB()
     {
-        foreach (GameObject element in BsideList)
-        {
-            element.SetActive(onAside);
-        }
-        foreach (GameObject element in AsideList)
-        {
-            element.SetActive(!onAside);
-        }
+        onAside = false;
     }
-    
     
     //PauseMenu
 
