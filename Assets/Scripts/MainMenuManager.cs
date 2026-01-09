@@ -15,24 +15,28 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Camera camRef;
     [SerializeField] private GameObject preTraGrp;
     [SerializeField] private GameObject postTraGrp;
+    [SerializeField] private GameObject postTraButtonGrp;
+    [SerializeField] private GameObject postTraTitle;
+    [SerializeField] private GameObject LvlSlctGrp;
     
     [Header("Colors")] 
-    [SerializeField] private Color whiteColor = Color.white;
-    [SerializeField] private Color blackColor = Color.black;
+    [SerializeField] private Color lightColor = Color.white;
+    [SerializeField] private Color darkColor = Color.black;
 
     private void Start()
     {
         preTraGrp.SetActive(true);
         postTraGrp.SetActive(false);
+        LvlSlctGrp.SetActive(false);
         camRef.backgroundColor = Color.black;
-        nameText.color = whiteColor;
+        nameText.color = lightColor;
     }
 
     private void Update()
     {
         PreTransitionFeedBack();
 
-        if (Input.GetKey(KeyCode.RightShift) && Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.LeftArrow))
         {
             RevealMainMenu();
         }
@@ -40,7 +44,7 @@ public class MenuManager : MonoBehaviour
 
     private void PreTransitionFeedBack()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             InputColorShift(true,LtextFrame, Ltext);
         }
@@ -49,7 +53,7 @@ public class MenuManager : MonoBehaviour
             InputColorShift(false,LtextFrame, Ltext);
         }
         
-        if (Input.GetKey(KeyCode.RightShift))
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             InputColorShift(true,RtextFrame, Rtext);
         }
@@ -74,9 +78,15 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void LoadLevel1()
+    public void LoadLevel(int i)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(i);
+    }
+
+    public void LevelPanel()
+    {
+        postTraButtonGrp.SetActive(false);
+        LvlSlctGrp.SetActive(true);
     }
 
     public void Quit()
@@ -91,9 +101,10 @@ public class MenuManager : MonoBehaviour
 
     private void ColorSwap()
     {
-        camRef.backgroundColor = whiteColor;
+        camRef.backgroundColor = lightColor;
+        postTraTitle.GetComponent<Image>().color = lightColor;
         preTraGrp.SetActive(false);
         postTraGrp.SetActive(true);
-        nameText.color = blackColor;
+        nameText.color = darkColor;
     }
 }

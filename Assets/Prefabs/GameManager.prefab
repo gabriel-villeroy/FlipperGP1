@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6361183088627971466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2477452464256857333}
+  - component: {fileID: 4351652263431984782}
+  - component: {fileID: 6648126295921733957}
+  - component: {fileID: 1136427625032128183}
+  - component: {fileID: 3273982857246628350}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2477452464256857333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6361183088627971466}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4351652263431984782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6361183088627971466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3632da475819045918e5774f08f30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 3785102622087268406, guid: d493228b2ff13364889b236097caf268, type: 3}
+  spawnPoint: {fileID: 0}
+  ballLeft: 3
+  ballInScene: 0
+  gameOverPanel: {fileID: 0}
+  winPanel: {fileID: 0}
+  pausePanel: {fileID: 0}
+  spawnBallHint: {fileID: 0}
+  spawnMark: {fileID: 0}
+  ballLeftText: {fileID: 0}
+  onAside: 0
+  currentGameState: 0
+--- !u!114 &6648126295921733957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6361183088627971466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c439c7ff2dc12fc4e8add17b1ff53397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  scoreText: {fileID: 0}
+  bumperBonus: 20
+--- !u!114 &1136427625032128183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6361183088627971466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef9fa6ef129b4b49b1766b8b13c0f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  A_UIColor: {r: 1, g: 0.1273585, b: 0.1273585, a: 1}
+  A_FinishColor: {r: 1, g: 0.3726415, b: 0.3726415, a: 0}
+  A_foregroundColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+  A_ballColor: {r: 1, g: 0, b: 0, a: 1}
+  A_primaryColor: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
+  A_secondaryColor: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
+  A_backgroundColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
+  B_UIColor: {r: 0, g: 0.25349808, b: 1, a: 1}
+  B_FinishColor: {r: 0.23113209, g: 0.4019917, b: 1, a: 0}
+  B_foregroundColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
+  B_ballColor: {r: 0, g: 0.19232295, b: 0.8773585, a: 1}
+  B_primaryColor: {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  B_secondaryColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  B_backgroundColor: {r: 0.888, g: 0.888, b: 0.888, a: 1}
+--- !u!114 &3273982857246628350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6361183088627971466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be709cb53be49844a539abd4154969a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightKey: 275
+  leftKey: 276
+  switchKey: 32
+  spawnKey: 304
+  rightPaddleRef: {fileID: 0}
+  leftPaddleRef: {fileID: 0}

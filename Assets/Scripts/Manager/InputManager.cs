@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [Header("Keys")] public KeyCode rightKey;
-    public KeyCode rightAltKey;
+    [Header("Keys")] 
+    public KeyCode rightKey;
     public KeyCode leftKey;
-    public KeyCode leftAltKey;
     public KeyCode switchKey;
-    public KeyCode shootKey;
+    public KeyCode spawnKey;
 
     [SerializeField] private GameObject rightPaddleRef;
     [SerializeField] private GameObject leftPaddleRef;
@@ -16,7 +15,6 @@ public class InputManager : MonoBehaviour
     private HingeController rightHC;
     private HingeController leftHC;
     private PaletteManager paletteManager;
-    [NonSerialized] public Shooter shooter;
 
     private void Start()
     {
@@ -32,17 +30,17 @@ public class InputManager : MonoBehaviour
         if (GameManager.Instance.currentGameState == GameManager.GameState.Game)
         {
             PaddleInputFuncCalls();
-        }
 
-        if (Input.GetKeyDown(switchKey))
-        {
-            if (GameManager.Instance.onAside)
+            if (Input.GetKeyDown(switchKey))
             {
-                paletteManager.swapToB.Invoke();
-            }
-            else
-            {
-                paletteManager.swapToA.Invoke();
+                if (GameManager.Instance.onAside)
+                {
+                    paletteManager.swapToB.Invoke();
+                }
+                else
+                {
+                    paletteManager.swapToA.Invoke();
+                }
             }
         }
 
@@ -51,14 +49,16 @@ public class InputManager : MonoBehaviour
             GameOverPanelInputs();
         }
 
-        if (Input.GetKey(shootKey) && shooter.canPush)
+        if (Input.GetKeyDown(spawnKey) && GameManager.Instance.currentGameState == GameManager.GameState.WaitingBall)
         {
-            shooter.ChargeShoot();
+            GameManager.Instance.spawnBallHint.SetActive(false);
+            GameManager.Instance.spawnMark.SetActive(false);
+            GameManager.Instance.SpawnBall();
         }
 
-        if (Input.GetKeyUp(shootKey))
+        if (GameManager.Instance.currentGameState == GameManager.GameState.Win)
         {
-            shooter.ReleaseShoot();
+            WinPanelInputs();
         }
     }
 
@@ -67,21 +67,18 @@ public class InputManager : MonoBehaviour
 
     private void PauseInputs()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (GameManager.Instance.currentGameState == GameManager.GameState.Game && Input.GetKeyDown(KeyCode.Escape))
         {
-            if (GameManager.Instance.currentGameState == GameManager.GameState.Game)
-            {
-                GameManager.Instance.SetPause(true);
-            }
-
-            if (GameManager.Instance.currentGameState == GameManager.GameState.Pause)
-            {
-                GameManager.Instance.SetPause(false);
-            }
+            GameManager.Instance.SetPause(true);
         }
 
         if (GameManager.Instance.currentGameState == GameManager.GameState.Pause)
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameManager.Instance.SetPause(false);
+            }
+            
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 GameManager.Instance.LoadMenu();
@@ -114,21 +111,39 @@ public class InputManager : MonoBehaviour
             GameManager.Instance.Quit();
         }
     }
+    
+    
+    //WinPanelInputs
 
+    private void WinPanelInputs()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            GameManager.Instance.LoadNext();
+        }
+
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            GameManager.Instance.LoadMenu();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            GameManager.Instance.Quit();
+        }
+    }
 
     //PaddleInputs
 
     private void PaddleInputFuncCalls()
     {
         PaddleInput(rightHC, rightKey);
-        PaddleInput(rightHC, rightAltKey);
         PaddleInput(leftHC, leftKey);
-        PaddleInput(leftHC, leftAltKey);
     }
 
-    private void PaddleInput(HingeController hingeController, KeyCode key)
+    private void PaddleInput(HingeController hc, KeyCode key)
     {
-        if (Input.GetKey(key)) hingeController.LiftPaddle(true);
-        else hingeController.LiftPaddle(false);
+        if (Input.GetKey(key)) hc.LiftPaddle(true);
+        else hc.LiftPaddle(false);
     }
 }

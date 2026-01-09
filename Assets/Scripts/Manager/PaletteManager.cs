@@ -28,13 +28,11 @@ public class PaletteManager : MonoBehaviour
     
     //[Header("References")]
     private Camera camRef;
-    private InputManager inputManager;
     
     private void Awake()
     {
         Instance = this;
         camRef = FindAnyObjectByType<Camera>();
-        inputManager = GetComponent<InputManager>();
     }
 
     private void Start()

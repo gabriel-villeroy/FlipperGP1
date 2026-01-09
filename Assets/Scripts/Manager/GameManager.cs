@@ -14,11 +14,13 @@ public class GameManager : MonoBehaviour
     public int ballLeft = 3;
     public bool ballInScene;
     [NonSerialized] public GameObject currentBall;
-    [NonSerialized] public Shooter shooter;
     
     [Header("UI")] 
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] public GameObject spawnBallHint;
+    [SerializeField] public GameObject spawnMark;
     [SerializeField] private TMP_Text ballLeftText;
 
     [Header("SideManagement")] 
@@ -30,7 +32,7 @@ public class GameManager : MonoBehaviour
     public enum GameState
     {
         Game,
-        Shooting,
+        WaitingBall,
         Pause,
         GameOver,
         Win
@@ -48,7 +50,14 @@ public class GameManager : MonoBehaviour
     {
         PaletteManager.Instance.swapToA += switchToA;
         PaletteManager.Instance.swapToB += switchToB;
-        SpawnBall();
+        
+        spawnBallHint.SetActive(false);
+        spawnMark.SetActive(false);
+        winPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
+
+        currentGameState = GameState.WaitingBall;
     }
 
     void Update()
@@ -62,19 +71,24 @@ public class GameManager : MonoBehaviour
         }
         if (!ballInScene)
         {
-            currentGameState = GameState.Shooting;
-            shooter.EnableShooter();
-            SpawnBall();
+            spawnBallHint.SetActive(true);
+            spawnMark.SetActive(true);
+            if (currentGameState == GameState.Game)
+            {
+                currentGameState = GameState.WaitingBall;
+            }
         }
     }
     
     
     //Game
     
-    private void SpawnBall()
+    public void SpawnBall()
     {
+        currentGameState = GameState.Game;
         currentBall = Instantiate(ball, spawnPoint.position, Quaternion.identity);
         currentBall.layer = 3;
+
         if (onAside)
         {
             currentBall.GetComponent<MeshRenderer>().material.color = PaletteManager.Instance.A_ballColor;
@@ -129,6 +143,14 @@ public class GameManager : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
     
+    //Win
+
+    public void SetWinPanel()
+    {
+        currentGameState = GameState.Win;
+        winPanel.SetActive(true);
+    }
+    
     
     //SceneControl
     
@@ -142,6 +164,18 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
+    }
+    
+    public void LoadNext()
+    {
+        if (SceneManager.GetActiveScene().buildIndex + 1 == SceneManager.sceneCountInBuildSettings)
+        {
+            LoadMenu();
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     public void Quit()

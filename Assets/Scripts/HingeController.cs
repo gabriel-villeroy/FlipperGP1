@@ -7,8 +7,6 @@ public class HingeController : MonoBehaviour
 
     [SerializeField] float targetPosition = 75f;
     [SerializeField] float originPosition;
-
-    public bool isRightPaddle;
     
     JointSpring jointSpring;
     
