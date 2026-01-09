@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
             currentGameState = GameState.Game;
             Time.timeScale = 1;
         }
-        pausePanel.SetActive(!pausePanel.activeSelf);
+        pausePanel.SetActive(paused);
     }
     
     

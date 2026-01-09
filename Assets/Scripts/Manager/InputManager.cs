@@ -27,7 +27,8 @@ public class InputManager : MonoBehaviour
     {
         PauseInputs();
 
-        if (GameManager.Instance.currentGameState == GameManager.GameState.Game)
+        if (GameManager.Instance.currentGameState == GameManager.GameState.Game ||
+            GameManager.Instance.currentGameState == GameManager.GameState.WaitingBall)
         {
             PaddleInputFuncCalls();
 
@@ -67,12 +68,13 @@ public class InputManager : MonoBehaviour
 
     private void PauseInputs()
     {
-        if (GameManager.Instance.currentGameState == GameManager.GameState.Game && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) &&
+            (GameManager.Instance.currentGameState == GameManager.GameState.Game ||
+            GameManager.Instance.currentGameState == GameManager.GameState.WaitingBall))
         {
             GameManager.Instance.SetPause(true);
-        }
-
-        if (GameManager.Instance.currentGameState == GameManager.GameState.Pause)
+        }   
+        else if (GameManager.Instance.currentGameState == GameManager.GameState.Pause)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
